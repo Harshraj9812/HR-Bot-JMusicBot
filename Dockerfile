@@ -5,6 +5,9 @@ FROM openjdk:11-jre
 WORKDIR /
 
 # Fetch the latest JMusicBot release JAR file
+RUN latest_release=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
+    && echo "Latest release version: $latest_release" \
+    && export latest_release=$latest_release
 RUN export latest_release=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') 
 RUN echo "Latest release version:" $latest_release 
 RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$latest_release/JMusicBot-$latest_release.jar" 
