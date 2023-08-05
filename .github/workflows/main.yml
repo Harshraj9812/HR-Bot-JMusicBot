@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:latest
+          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:latest
 
       - name: Push Docker image to Docker Hub
         run: |
