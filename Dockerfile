@@ -15,7 +15,7 @@ ENV LATEST_RELEASE=$latest_release
 
 RUN echo "Latest release version:" $latest_release 
 RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$latest_release/JMusicBot-$latest_release.jar" 
-RUN echo "curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$latest_release/JMusicBot-$latest_release.jar""
+RUN echo curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$latest_release/JMusicBot-$latest_release.jar"
 RUN mv JMusicBot-$latest_release.jar JMusicBot.jar
 COPY config.txt /config.txt
 
