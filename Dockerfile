@@ -11,6 +11,6 @@ RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$MUSICBOT_V
     && mv "JMusicBot-$MUSICBOT_VERSION.jar" JMusicBot.jar
 
 # Copy the config.txt file
-COPY config.txt /config.txt
+COPY config.properties /config.properties
 
 CMD ["java", "-Dnogui=true", "-jar", "/JMusicBot.jar"]
