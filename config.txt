@@ -20,7 +20,7 @@ token = OTE5MjI4NjA2OTAxODEzMzY5.GI8sJ9.2uYJls5tXqbmgSF1XntsWCgT8coQoSO5J0C9WA
 // This needs to be the owner's ID (a 17-18 digit number)
 // https://github.com/jagrosh/MusicBot/wiki/Finding-Your-User-ID
 
-owner = ${{ secrets.DISCORD_APP_API }}
+owner = "${{ secrets.DISCORD_APP_API }}"
 
 
 // This sets the prefix for the bot
