@@ -4,12 +4,13 @@ FROM openjdk:11-jre
 # Set the working directory inside the container
 WORKDIR /
 # Install Curl
-RUN apt-get update && apt-get install -y curl
-# Fetch the latest JMusicBot release JAR file
-RUN latest_release=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | jq -r '.tag_name') \
-    && echo "Latest release version: $latest_release" \
-    && curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$latest_release/JMusicBot-$latest_release.jar" \
-    && mv "JMusicBot-$latest_release.jar" JMusicBot.jar
+RUN LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
+
+RUN echo "Latest release version: $LATEST_RELEASE"
+
+# Download and rename the JAR file
+RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$LATEST_RELEASE/JMusicBot-$LATEST_RELEASE.jar" \
+    && mv "JMusicBot-$LATEST_RELEASE.jar" JMusicBot.jar
 
 COPY config.txt /config.txt
 
