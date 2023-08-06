@@ -1,5 +1,6 @@
-# Use OpenJDK JRE 11 as the base image
 FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y curl python3
 
 # Set the working directory inside the container
 WORKDIR /
