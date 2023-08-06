@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       musicbot_version:
-        description: 'Jagrosh/MusicBot version (required)'
+        description: 'Jagrosh/MusicBot version (required) Ex-0.3.9'
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} -t your-docker-username/musicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
+        docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} -t ${{ secrets.DOCKER_USERNAME }}hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
 
     - name: Log in to Docker Hub
       env:
@@ -30,4 +30,4 @@ jobs:
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
     - name: Push Docker Image
-      run: docker push your-docker-username/musicbot:${{ steps.set_up_args.outputs.musicbot_version }}
+      run: docker push ${{ secrets.DOCKER_USERNAME }}hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }}
