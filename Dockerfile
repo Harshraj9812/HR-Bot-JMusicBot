@@ -1,19 +1,18 @@
-FROM ubuntu:latest
+FROM openjdk:11-jre
 
 RUN apt-get update && apt-get install -y curl python3
 
-# Set the working directory inside the container
+ARG MUSICBOT_VERSION
+
 WORKDIR /
-# Install Curl
-RUN LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
 
-RUN echo "Latest release version: $LATEST_RELEASE"
+RUN echo "Building MusicBot version: $MUSICBOT_VERSION"
 
-# Download and rename the JAR file
-RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$LATEST_RELEASE/JMusicBot-$LATEST_RELEASE.jar" \
-    && mv "JMusicBot-$LATEST_RELEASE.jar" JMusicBot.jar
+# Download and rename the JAR file based on the provided version
+RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$MUSICBOT_VERSION/JMusicBot-$MUSICBOT_VERSION.jar" \
+    && mv "JMusicBot-$MUSICBOT_VERSION.jar" JMusicBot.jar
 
+# Copy the config.txt file
 COPY config.txt /config.txt
 
-# Define the command to run the Java application with the specified options
 CMD ["java", "-Dnogui=true", "-jar", "/JMusicBot.jar"]
