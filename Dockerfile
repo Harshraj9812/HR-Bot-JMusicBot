@@ -1,5 +1,5 @@
 # Use OpenJDK JRE 11 as the base image
-FROM openjdk:11-jre
+FROM ubuntu:latest
 
 # Set the working directory inside the container
 WORKDIR /
