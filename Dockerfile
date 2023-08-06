@@ -5,7 +5,7 @@ FROM openjdk:11-jre
 WORKDIR /
 
 # Fetch the latest JMusicBot release JAR file
-RUN latest_release=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') 
+ENV latest_release=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') 
 RUN echo "Latest release version: $latest_release" export latest_release=$latest_release curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$latest_release/JMusicBot-$latest_release.jar" mv JMusicBot-$latest_release.jar JMusicBot.jar 
 
 COPY config.txt /config.txt
