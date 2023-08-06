@@ -3,7 +3,8 @@ FROM openjdk:11-jre
 
 # Set the working directory inside the container
 WORKDIR /
-
+# Install Curl
+RUN apt-get update && apt-get install -y curl
 # Fetch the latest JMusicBot release JAR file
 RUN latest_release=$(curl --silent "https://api.github.com/repos/jagrosh/MusicBot/releases/latest" | jq -r '.tag_name') \
     && echo "Latest release version: $latest_release" \
