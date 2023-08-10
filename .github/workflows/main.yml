@@ -23,6 +23,7 @@ jobs:
       env:
         DISCORD_APP_API: ${{secrets.DISCORD_APP_API}}
       run: |
+        sudo apt-get install gnupg-pkcs11-scd
         scd -i "s/BOT_TOKEN/$DISCORD_APP_API/g" config.txt 
         docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
         
