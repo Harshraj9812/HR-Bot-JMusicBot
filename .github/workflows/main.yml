@@ -18,6 +18,11 @@ jobs:
     - name: Set up Docker Build Arguments
       id: set_up_args
       run: echo "::set-output name=musicbot_version::${{ github.event.inputs.musicbot_version }}"
+    
+    - name: Print Debug Information
+      run: |
+        env  # Print environment variables
+        ls -l /path/to/scd  # Check if scd is accessible
 
     - name: Build Docker Image
       env:
