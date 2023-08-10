@@ -6,9 +6,6 @@ on:
       musicbot_version:
         description: 'Jagrosh/MusicBot version (required) Ex-0.3.9'
         required: true
-      bot_token:
-        description: "Discord Bot Token"
-        required: true
 
 jobs:
   build:
@@ -27,7 +24,7 @@ jobs:
         DISCORD_APP_API: ${{secrets.DISCORD_APP_API}}
       run: |
         scd -i "s/BOT_TOKEN/$DISCORD_APP_API/g" config.txt 
-        docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} --build-arg BOT_TOKEN=${{ steps.set_up_args.outputs.bot_token}} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
+        docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
     - name: Log in to Docker Hub
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
