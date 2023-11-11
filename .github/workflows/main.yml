@@ -21,12 +21,11 @@ jobs:
 
       - name: Set up Docker Build Arguments
         id: set_up_args
-        run: echo "musicbot_version::${{ github.event.inputs.musicbot_version }}"
+        run: echo "musicbot_version:${{ github.event.inputs.musicbot_version }}"
 
       - name: Build Docker Image
-        env:
-          DISCORD_APP_API: ${{ github.event.inputs.discord-bot-token }}
         run: |
+          DISCORD_APP_API=${{ github.event.inputs.discord_app_api }}
           sed -i "s/BOT_TOKEN/$DISCORD_APP_API/g" config.txt 
           docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
 
