@@ -7,7 +7,7 @@ on:
         description: 'Jagrosh/MusicBot version (required) Ex-0.3.9'
         required: true
       discord-bot-token:
-        description: "Discord BOT Token (Only to build the Image with you Bot Token [Not saved anywhere])"
+        description: "Discord BOT Token (Only to build the Image with your Bot Token [Not saved anywhere])"
         required: true
 
 jobs:
@@ -18,25 +18,25 @@ jobs:
       discord-bot-token: ${{ github.event.inputs.discord-bot-token }}
 
     steps:
-      # This will clone the Latest Commit files
-    - name: Checkout Repository
-      uses: actions/checkout@v2      
+      - name: Checkout Repository
+        uses: actions/checkout@v2      
 
-    - name: Set Environment Variables
-      run: |
-        echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
-        echo "DISCORD_BOT_TOKEN=${discord-bot-token}" >> $GITHUB_ENV
-        sed -i "s/BOT_TOKEN/${DISCORD_BOT_TOKEN}/g" config.txt
+      - name: Set Environment Variables
+        run: |
+          echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
+          echo "DISCORD_BOT_TOKEN=${discord-bot-token}" >> $GITHUB_ENV
+          sed -i "s/BOT_TOKEN/${DISCORD_BOT_TOKEN}/g" config.txt
 
-    - name: Building Docker Image
-      run: docker build --build-arg MUSICBOT_VERSION=${{ env.MUSICBOT_VERSION }} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ env.MUSICBOT_VERSION }} 
+      - name: Building Docker Image
+        run: |
+          docker buildx build --build-arg MUSICBOT_VERSION=${{ env.MUSICBOT_VERSION }} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ env.MUSICBOT_VERSION }} .
 
-    - name: Log in to Docker Hub
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: |
-        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+      - name: Log in to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-    - name: Pushing Docker Image to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ env.MUSICBOT_VERSION }}
+      - name: Pushing Docker Image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ env.MUSICBOT_VERSION }}
