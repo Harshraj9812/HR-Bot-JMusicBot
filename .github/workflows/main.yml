@@ -13,22 +13,19 @@ on:
 jobs:
   Build-Push-Docker-Image:
     runs-on: ubuntu-latest
+    env:
+      musicbot_version: ${{ github.event.inputs.musicbot_version }}
+      discord-bot-token: ${{ github.event.inputs.discord-bot-token }}
 
     steps:
       # This will clone the Latest Commit files
     - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Set up Docker Build Arguments
-      id: set_up_args
-      run: |
-        echo "musicbot_version=${{ github.event.inputs.musicbot_version }}" >> $GITHUB_OUTPUT
-        "discord-bot-token=${{ github.event.inputs.discord-bot-token }}" >> $GITHUB_OUTPUT
+      uses: actions/checkout@v2      
 
     - name: Building Docker Image
       run: |
-        sed -i "s/BOT_TOKEN/${{ steps.set_up_args.outputs.discord-bot-token }}/g" config.txt 
-        docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
+        sed -i "s/BOT_TOKEN/$discord-bot-token/g" config.txt 
+        docker build --build-arg $musicbot_version -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
         
     - name: Log in to Docker Hub
       env:
