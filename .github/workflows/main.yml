@@ -25,7 +25,7 @@ jobs:
     - name: Building Docker Image
       run: |
         sed -i "s/BOT_TOKEN/${discord-bot-token}/g" config.txt 
-        docker build --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
+        docker build --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version} .
         
     - name: Log in to Docker Hub
       env:
