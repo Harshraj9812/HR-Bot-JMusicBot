@@ -24,6 +24,7 @@ jobs:
         run: |
           echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
           echo "::set-env name=DISCORD_BOT_TOKEN::${{ github.event.inputs.discord-bot-token }}"
+          echo "DISCORD_BOT_TOKEN=${{ github.event.inputs.discord-bot-token }}" >> "$GITHUB_ENV"
           echo "::add-mask::$DISCORD_BOT_TOKEN"  # This line masks the Discord bot token
 
       - name: Building Docker Image
