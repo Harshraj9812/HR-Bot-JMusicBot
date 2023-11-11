@@ -27,7 +27,7 @@ jobs:
         env:
           DISCORD_APP_API: ${{ github.event.inputs.discord-bot-token }}
         run: |
-          sed -i "s/BOT_TOKEN/$DISCORD_APP_API/g" config.txt 
+          sed -i "s/BOT_TOKEN/${{ github.event.inputs.discord-bot-token }}/g" config.txt 
           docker build --build-arg MUSICBOT_VERSION=${{ steps.set_up_args.outputs.musicbot_version }} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }} .
 
       - name: Log in to Docker Hub
