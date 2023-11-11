@@ -7,7 +7,7 @@ on:
         description: "Jagrosh/MusicBot version (required) Ex-0.3.9"
         required: true
       discord-bot-token:
-        description: "Please Enter your Discord Bot token (Only to build the Image with you Bot Token [Not saved anywhere])"
+        description: "Discord BOT Token (Only to build the Image with you Bot Token [Not saved anywhere])"
         required: true
 
 jobs:
