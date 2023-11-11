@@ -14,6 +14,12 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
+    
+    - name: Install scd
+      run: |
+        wget https://path/to/scd -O scd
+        chmod +x scd
+        sudo mv scd /usr/local/bin/
 
     - name: Set up Docker Build Arguments
       id: set_up_args
