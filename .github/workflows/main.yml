@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  build:
+  Build-Push-Docker-Image:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,9 +18,9 @@ jobs:
 
     - name: Set up Docker Build Arguments
       id: set_up_args
-      run: echo "::set-output name=musicbot_version::${{ github.event.inputs.musicbot_version }}"
+      run: echo "musicbot_version:${{ github.event.inputs.musicbot_version }}"
 
-    - name: Build Docker Image
+    - name: Building Docker Image
       env:
         DISCORD_APP_API: ${{secrets.DISCORD_APP_API}}
       run: |
@@ -34,5 +34,5 @@ jobs:
       run: |
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-    - name: Push Docker Image
+    - name: Pushing Docker Image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${{ steps.set_up_args.outputs.musicbot_version }}
