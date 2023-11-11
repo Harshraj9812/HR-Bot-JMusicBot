@@ -18,7 +18,7 @@ jobs:
 
     - name: Set up Docker Build Arguments
       id: set_up_args
-      run: echo "::set-output name=musicbot_version::${{ github.event.inputs.musicbot_version }}"
+      run: echo "musicbot_version=${{ github.event.inputs.musicbot_version }}" >> $GITHUB_OUTPUT
 
     - name: Building Docker Image
       env:
