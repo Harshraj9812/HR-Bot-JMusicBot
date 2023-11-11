@@ -23,7 +23,7 @@ jobs:
       id: set_up_args
       run: |
         echo "musicbot_version=${{ github.event.inputs.musicbot_version }}" >> $GITHUB_OUTPUT
-        echo "discord-bot-token=${{ github.event.inputs.discord-bot-token }}" >> $GITHUB_OUTPUT
+        "discord-bot-token=${{ github.event.inputs.discord-bot-token }}" >> $GITHUB_OUTPUT
 
     - name: Building Docker Image
       run: |
