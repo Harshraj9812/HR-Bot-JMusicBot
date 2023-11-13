@@ -19,14 +19,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Set Environment Variables
 
+      - name: Set Environment Variables
         run: |
           echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
-          DISCORD_BOT_TOKEN=$(jq -r '.inputs.discord-bot-token' $GITHUB_EVENT_PATH)
-          echo ::add-mask::$DISCORD_BOT_TOKEN
-          echo DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN >> $GITHUB_ENV
-          
+          "DISCORD_BOT_TOKEN=${discord-bot-token}" >> $GITHUB_ENV
+                    
       - name: Building Docker Image
         run: |
           sed -i "s/BOT_TOKEN/${DISCORD_BOT_TOKEN}/g" config.txt 
