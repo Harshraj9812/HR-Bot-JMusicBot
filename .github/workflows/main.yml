@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       musicbot_version: ${{ github.event.inputs.musicbot_version }}
+      discord-bot-token: ${{ github.event.inputs.discord-bot-token }}
 
     steps:
       - name: Checkout Repository
@@ -23,7 +24,7 @@ jobs:
       - name: Set Environment Variables
         run: |
           echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
-          echo "DISCORD_BOT_TOKEN=${discord-bot-token}" >> $GITHUB_ENV
+          echo ::add-mask::"DISCORD_BOT_TOKEN=${discord-bot-token}" >> $GITHUB_ENV
                     
       - name: Building Docker Image
         run: |
