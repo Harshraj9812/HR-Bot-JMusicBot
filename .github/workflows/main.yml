@@ -23,6 +23,7 @@ jobs:
 
       - name: Set Environment Variables
         run: |
+          echo ${musicbot_version}
           DISCORD_BOT_TOKEN=$(jq -r '.inputs.discord-bot-token' $GITHUB_EVENT_PATH)
           echo "::add-mask::$DISCORD_BOT_TOKEN" 
           echo "DISCORD_BOT_TOKEN=${discord-bot-token}" >> $GITHUB_ENV
