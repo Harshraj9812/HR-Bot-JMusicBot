@@ -20,11 +20,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with: 
+          DISCORD_BOT_TOKEN: ${{ secrets.discord-bot-token }}
 
       - name: Set Environment Variables
+
         run: |
           echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
-          DISCORD_BOT_TOKEN: ${{ secrets.discord-bot-token }}
           
       - name: Building Docker Image
         run: |
