@@ -23,7 +23,7 @@ jobs:
       - name: Set Environment Variables
         run: |
           echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
-          echo "DISCORD_BOT_TOKEN=${{ github.event.inputs.discord-bot-token }}" >> "$GITHUB_ENV"
+          echo "DISCORD_BOT_TOKEN=${{ secrets[github.event.inputs.discord-bot-token] }}" >> "$GITHUB_ENV"
 
       - name: Building Docker Image
         run: |
