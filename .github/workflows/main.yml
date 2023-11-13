@@ -23,7 +23,6 @@ jobs:
 
       - name: Set Environment Variables
         run: |
-          echo "MUSICBOT_VERSION=${musicbot_version}" >> $GITHUB_ENV
           DISCORD_BOT_TOKEN=$(jq -r '.inputs.discord-bot-token' $GITHUB_EVENT_PATH)
           echo "::add-mask::$DISCORD_BOT_TOKEN" 
           echo "DISCORD_BOT_TOKEN=${discord-bot-token}" >> $GITHUB_ENV
@@ -31,6 +30,7 @@ jobs:
       - name: Building Docker Image
         run: |
           sed -i "s/BOT_TOKEN/${DISCORD_BOT_TOKEN}/g" config.txt 
+          echo ${musicbot_version}
           docker build --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version} .
 
       - name: Log in to Docker Hub
