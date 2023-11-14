@@ -45,7 +45,7 @@ JMusicBot supports all sources and formats supported by [lavaplayer](https://git
 
 ### Run using `Docker-compose`
 * Provide you Bot Token in Environment Variable.
-* Modify the Version as provided while building the Image time.
+* Modify the Version as provided [while building](#build-using-github-actions) the Image time.
 
 ```
 version: "3"
