@@ -4,7 +4,7 @@ ARG MUSICBOT_VERSION
 
 WORKDIR /
 
-ENV TOKEN=token
+ENV TOKEN token
 
 RUN echo "Building MusicBot version: $MUSICBOT_VERSION"
 
@@ -15,4 +15,4 @@ RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$MUSICBOT_V
 # Copy the config.txt fileF
 COPY config.txt /config.txt
 
-CMD ["java", "-Dprefix=${TOKEN}", "-jar", "/JMusicBot.jar"]
+CMD ["java","-Dnogui=true", "-Dprefix=${TOKEN}", "-jar", "/JMusicBot.jar"]
