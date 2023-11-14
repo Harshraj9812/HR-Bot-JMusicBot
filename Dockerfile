@@ -15,4 +15,4 @@ RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$MUSICBOT_V
 # Copy the config.txt fileF
 COPY config.txt /config.txt
 
-CMD ["java", "-Dnogui=true", "-Dprefix=${TOKEN}", "-jar", "/JMusicBot.jar"]
+CMD ["java", "-Dprefix=${TOKEN}", "-jar", "/JMusicBot.jar"]
