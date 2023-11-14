@@ -3,6 +3,7 @@ services:
   discord-bot:
     container_name: Discord-Hr-Music-bot
     restart: unless-stopped
+    # Modify Version as per input[0.3.9]
     image: harshraj9812/hr-bot-jmusicbot:0.3.9
     labels:
       # This is for Watchtower to Ignore Updating this Image.
