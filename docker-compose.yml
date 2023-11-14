@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     image: harshraj9812/hr-bot-jmusicbot:0.3.9
     labels:
+      # This is for Watchtower to Ignore Updating this Image.
       - "com.centurylinklabs.watchtower.enable=false"
     environment:
       # Add your Bot TOken below
