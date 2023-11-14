@@ -12,7 +12,7 @@ RUN echo "Building MusicBot version: $MUSICBOT_VERSION"
 RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$MUSICBOT_VERSION/JMusicBot-$MUSICBOT_VERSION.jar" \
     && mv "JMusicBot-$MUSICBOT_VERSION.jar" JMusicBot.jar
 
-# Copy the config.txt fileF
+# Copy the config.txt file
 COPY config.txt /config.txt
 
 # Replace occurrences of ${BOT-TOKEN} with the value of TOKEN in config.txt during runtime

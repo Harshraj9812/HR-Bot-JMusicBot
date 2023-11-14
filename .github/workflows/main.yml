@@ -21,7 +21,7 @@ jobs:
       - name: Building Docker Image
         run: |
           echo ${musicbot_version}
-          docker build --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-env .
+          docker build --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version} .
 
       - name: Log in to Docker Hub
         env:
@@ -31,4 +31,4 @@ jobs:
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
       - name: Pushing Docker Image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-env
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}
