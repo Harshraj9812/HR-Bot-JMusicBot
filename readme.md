@@ -35,6 +35,7 @@ JMusicBot supports all sources and formats supported by [lavaplayer](https://git
   * Stream playlists (M3U and PLS)
 
 ## Steps to Build and Deploy
+[![Build MusicBot Docker Image](https://github.com/Harshraj9812/HR-Bot-JMusicBot/actions/workflows/main.yml/badge.svg?branch=main&event=workflow_dispatch)](https://github.com/Harshraj9812/HR-Bot-JMusicBot/actions/workflows/main.yml)
 
 ### Build Using `Github Actions`
 * Go to [Actions/Build MusicBot Docker Image](https://github.com/Harshraj9812/HR-Bot-JMusicBot/actions/workflows/main.yml)
