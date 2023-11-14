@@ -6,16 +6,13 @@ on:
       musicbot_version:
         description: 'Jagrosh/MusicBot version (required) Ex-0.3.9'
         required: true
-      discord-bot-token:
-        description: "Discord BOT Token (Only to build the Image with you Bot Token [Not saved anywhere])"
-        required: true
+        default: '0.3.9'
 
 jobs:
   Build-Push-Docker-Image:
     runs-on: ubuntu-latest
     env:
       musicbot_version: ${{ github.event.inputs.musicbot_version }}
-      DISCORD_BOT_TOKEN: ${{ github.event.inputs.discord-bot-token }}
 
     steps:
       - name: Checkout Repository
@@ -23,7 +20,6 @@ jobs:
                     
       - name: Building Docker Image
         run: |
-          sed -i "s/BOT_TOKEN/${DISCORD_BOT_TOKEN}/g" config.txt 
           echo ${musicbot_version}
           docker build --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version} .
 
