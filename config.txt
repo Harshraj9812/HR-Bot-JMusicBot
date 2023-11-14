@@ -13,7 +13,7 @@
 // If you don't know how to get a bot token, please see the guide here:
 // https://github.com/jagrosh/MusicBot/wiki/Getting-a-Bot-Token
 
-token = ${CUSTOM_PREFIX}
+token = ${token}
 
 
 // This sets the owner of the bot
@@ -165,7 +165,7 @@ aliases {
   playnext = []
   repeat = []
   skipto = [ jumpto ]
-  stop = []
+  stop = [ dc ]
   volume = [ vol ]
 }
 
