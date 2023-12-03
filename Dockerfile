@@ -5,7 +5,7 @@ ARG MUSICBOT_VERSION
 WORKDIR /
 
 RUN pwd
-RUN ls-lrt
+RUN ls -lrt
 
 ENV TOKEN harsh
 
