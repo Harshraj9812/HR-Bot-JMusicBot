@@ -4,6 +4,9 @@ ARG MUSICBOT_VERSION
 
 WORKDIR /
 
+RUN pwd
+RUN ls-lrt
+
 ENV TOKEN harsh
 
 RUN echo "Building MusicBot version: $MUSICBOT_VERSION"
