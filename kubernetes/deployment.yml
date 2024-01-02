@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discord-bot-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discord-bot
+  template:
+    metadata:
+      labels:
+        app: discord-bot
+    spec:
+      containers:
+      - name: discord-bot
+        image: harshraj9812/hr-bot-jmusicbot:0.3.9
+        env:
+        - name: TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: discord-bot-secret
+              key: TOKEN
+        ports:
+        - containerPort: 80
