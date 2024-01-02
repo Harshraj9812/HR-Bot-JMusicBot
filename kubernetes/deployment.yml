@@ -21,5 +21,5 @@ spec:
             secretKeyRef:
               name: discord-bot-secret
               key: TOKEN
-        ports:
-        - containerPort: 80
+        # ports:
+        # - containerPort: 80
