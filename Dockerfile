@@ -1,4 +1,4 @@
-FROM openjdk:11-jre
+FROM amazoncorretto:8
 
 ARG MUSICBOT_VERSION
 
