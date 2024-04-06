@@ -1,4 +1,4 @@
-FROM amazoncorretto:8-al2023-jre
+FROM amazoncorretto:11-al2023
 
 ARG MUSICBOT_VERSION
 
