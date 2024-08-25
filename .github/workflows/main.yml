@@ -36,7 +36,7 @@ jobs:
       - name: Building Docker Image for arm64
         run: |
           echo ${musicbot_version}
-          docker build --platform linux/arm64 --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-arm64 .
-
+          docker build --platform linux/arm64 --build-arg MUSICBOT_VERSION=${musicbot_version} -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-arm64 -f Dockerfile.arm64 .
+      
       - name: Pushing arm64 Docker Image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-arm64
