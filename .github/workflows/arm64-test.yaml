@@ -37,6 +37,8 @@ jobs:
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
             --build-arg MUSICBOT_VERSION=${musicbot_version} \
-            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-amd/arm64 \
+            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-amd64 \
+            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-arm64 \
             --push .
+
 
