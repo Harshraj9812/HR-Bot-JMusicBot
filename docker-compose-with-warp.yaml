@@ -1,0 +1,30 @@
+version: "3"
+services:
+  discord-bot:
+    container_name: Hr-Music-bot-Discord
+    restart: unless-stopped
+    # image: harshraj9812/hr-bot-jmusicbot:latest
+    image: harshraj9812/hr-bot-jmusicbot:latest-multi
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    environment:
+      - TOKEN= #BOT TOKEN
+    network_mode: "service:warp"
+    depends_on:
+      - warp
+  warp:
+    container_name: Wrap-Hr-Music-bot-Discord
+    image: caomingjun/warp
+    restart: unless-stopped
+    ports:
+      - '1080:1080'
+    environment:
+      - WARP_SLEEP=2
+      # - WARP_LICENSE_KEY= # optional
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv4.conf.all.src_valid_mark=1
+    volumes:
+      - ./data:/var/lib/cloudflare-warp
