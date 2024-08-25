@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-                    
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
@@ -30,13 +30,24 @@ jobs:
         run: |
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-      - name: Building and Pushing Docker Image for arm64 and amd64
+      - name: Build and Push Docker Image for amd64
         run: |
           echo ${musicbot_version}
           docker buildx create --use
           docker buildx build \
-            --platform linux/amd64,linux/arm64 \
+            --platform linux/amd64 \
             --build-arg MUSICBOT_VERSION=${musicbot_version} \
             -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-amd64 \
+            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:latest-amd64 \
+            --push .
+
+      - name: Build and Push Docker Image for arm64
+        run: |
+          echo ${musicbot_version}
+          docker buildx create --use
+          docker buildx build \
+            --platform linux/arm64 \
+            --build-arg MUSICBOT_VERSION=${musicbot_version} \
             -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-arm64 \
+            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:latest-arm64 \
             --push .
