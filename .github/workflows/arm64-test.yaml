@@ -1,4 +1,4 @@
-name: Build arm64 MusicBot Docker Image
+name: Build arm64 and amd64 MusicBot Docker Image
 
 on:
   workflow_dispatch:
@@ -37,6 +37,6 @@ jobs:
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
             --build-arg MUSICBOT_VERSION=${musicbot_version} \
-            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version} \
+            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-amd/arm64 \
             --push .
 
