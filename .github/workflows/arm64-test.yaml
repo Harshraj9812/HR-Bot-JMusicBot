@@ -40,5 +40,3 @@ jobs:
             -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-amd64 \
             -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-arm64 \
             --push .
-
-
