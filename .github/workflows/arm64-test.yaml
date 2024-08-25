@@ -1,4 +1,4 @@
-name: Build arm64 and amd64 MusicBot Docker Image
+name: Build Multi-Architecture MusicBot Docker Image
 
 on:
   workflow_dispatch:
@@ -30,24 +30,13 @@ jobs:
         run: |
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-      - name: Build and Push Docker Image for amd64
+      - name: Build and Push Multi-Architecture Docker Image
         run: |
           echo ${musicbot_version}
           docker buildx create --use
           docker buildx build \
-            --platform linux/amd64 \
+            --platform linux/amd64,linux/arm64 \
             --build-arg MUSICBOT_VERSION=${musicbot_version} \
-            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-amd64 \
-            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:latest-amd64 \
-            --push .
-
-      - name: Build and Push Docker Image for arm64
-        run: |
-          echo ${musicbot_version}
-          docker buildx create --use
-          docker buildx build \
-            --platform linux/arm64 \
-            --build-arg MUSICBOT_VERSION=${musicbot_version} \
-            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-arm64 \
-            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:latest-arm64 \
+            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:${musicbot_version}-multi \
+            -t ${{ secrets.DOCKER_USERNAME }}/hr-bot-jmusicbot:latest-multi \
             --push .
