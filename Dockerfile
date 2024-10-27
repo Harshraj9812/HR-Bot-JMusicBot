@@ -1,4 +1,4 @@
-FROM amazoncorretto:11-al2023
+FROM amazoncorretto:23-al2023
 
 ARG MUSICBOT_VERSION
 
