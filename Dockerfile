@@ -12,11 +12,12 @@ ENV TOKEN harsh
 RUN echo "Building MusicBot version: $MUSICBOT_VERSION"
 
 # Download and rename the JAR file based on the provided version
-RUN curl -LJO "https://github.com/jagrosh/MusicBot/releases/download/$MUSICBOT_VERSION/JMusicBot-$MUSICBOT_VERSION.jar" \
-    && mv "JMusicBot-$MUSICBOT_VERSION.jar" JMusicBot.jar
+RUN curl -LJO "https://github.com/noxianwill/MusicBot/releases/download/v0.4.3-fixed/JMusicBot-0.4.3-fixed.jar" \
+    && mv "JMusicBot-0.4.3-fixed.jar" JMusicBot.jar
 
 # Copying Repo config.txt file to Build
 COPY config.txt /config.txt
 
 # Replace occurrences of ${BOT-TOKEN} with the value of TOKEN in config.txt during runtime
 CMD ["sh", "-c", "sed -i 's/${BOT-TOKEN}/${TOKEN}/g' /config.txt && java -Dnogui=true -jar /JMusicBot.jar"]
+
